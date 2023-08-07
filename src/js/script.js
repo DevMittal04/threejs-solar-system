@@ -24,6 +24,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 document.body.appendChild(renderer.domElement);
 
 const orbit = new OrbitControls(camera, renderer.domElement);
@@ -102,6 +103,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  orbit.update();
   render();
 }
 
@@ -131,6 +133,7 @@ function animate() {
   neptune.obj.rotation.y += 0.0001;
   pluto.obj.rotation.y += 0.00007;
 
+  orbit.update();
   render()
 }
 
